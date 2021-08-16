@@ -1,0 +1,41 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background-color: #141e61;
+
+  &__container {
+    display: flex;
+    grid-gap: 2rem;
+    align-items: center;
+
+    & h2 span {
+      font-size: 1.5rem;
+      color: #fcd8d4;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+  }
+
+  &__logo {
+    color: #fff;
+  }
+
+  &__items,
+  &__item {
+    display: flex;
+    grid-gap: 1rem;
+    align-items: center;
+    list-style: none;
+  }
+
+  &__items {
+    grid-gap: 2rem;
+  }
+  &__links {
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: #fff;
+  }
+}

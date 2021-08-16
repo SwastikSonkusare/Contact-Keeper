@@ -13,7 +13,7 @@ const App = () => {
       <Header />
 
       <main>
-        <Route path="/" exact component={HomeScreen} />
+        {/* <Route path="/" exact component={HomeScreen} /> */}
         <Route path="/signin" component={LoginScreen} />
         <Route path="/signup" component={RegisterScreen} />
       </main>
