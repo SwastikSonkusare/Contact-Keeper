@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 
 import { signIn } from "../../actions/auth";
 
+import "./LoginScreen.scss";
+
 const LoginScreen = () => {
   const initialState = {
     email: "",
@@ -31,7 +33,7 @@ const LoginScreen = () => {
 
   return (
     <div className="auth">
-      <h1 className="auth__header">Login</h1>
+      <h1 className="auth__header">Account Login</h1>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form__control">
           <label className="form__label">Email</label>
@@ -59,7 +61,7 @@ const LoginScreen = () => {
         </div>
 
         <button className="form__button" type="submit">
-          Register
+          Login
         </button>
       </form>
     </div>

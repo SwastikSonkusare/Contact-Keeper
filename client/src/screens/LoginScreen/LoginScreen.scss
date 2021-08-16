@@ -1,0 +1,48 @@
+.auth {
+  margin: 10rem auto;
+  max-width: 50rem;
+
+  &__header {
+    text-transform: uppercase;
+    font-size: 3rem;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #b980f0;
+    margin-bottom: 2rem;
+  }
+}
+
+.form {
+  &__control {
+    display: flex;
+    grid-gap: 1rem;
+    flex-direction: column;
+    margin-block-end: 3rem;
+  }
+
+  &__label {
+    font-size: 2rem;
+    color: #161616;
+  }
+
+  &__input {
+    padding: 0.7rem 1rem;
+    border-radius: 30px;
+
+    &:focus {
+      outline: none;
+      border: 2px solid #261c2c;
+    }
+  }
+
+  &__button {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    background-color: #6e85b2;
+    letter-spacing: 2px;
+  }
+}
