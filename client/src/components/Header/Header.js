@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import decode from "jwt-decode";
 
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressBook, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +14,8 @@ import { LOGOUT } from "../../constants/actionTypes";
 const Header = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   useEffect(() => {
@@ -27,7 +29,7 @@ const Header = () => {
       }
     }
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [user?.token]);
+  }, [user?.token, location]);
 
   const logoutHandler = () => {
     dispatch({ type: LOGOUT });

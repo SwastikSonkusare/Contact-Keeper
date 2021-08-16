@@ -24,7 +24,7 @@ const LoginScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(signIn(formData), history);
+    dispatch(signIn(formData));
   };
 
   if (isLoggedIn) {
