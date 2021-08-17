@@ -20,6 +20,12 @@
     margin-block-end: 3rem;
   }
 
+  &__checkbox {
+    display: flex;
+    align-items: center;
+    grid-gap: 1rem;
+  }
+
   &__label {
     font-size: 2rem;
     color: #161616;

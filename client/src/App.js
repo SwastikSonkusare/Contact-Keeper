@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
+import DashboardScreen from "./screens/DashboardScreen/DashboardScreen";
 import Header from "./components/Header/Header";
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           exact
           component={() => (!user ? <RegisterScreen /> : <Redirect to="/" />)}
         />
+        <Route path="/dashboard" exact component={DashboardScreen} />
       </main>
     </Router>
   );

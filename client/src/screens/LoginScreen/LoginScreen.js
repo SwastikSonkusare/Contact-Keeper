@@ -20,7 +20,9 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  const redirect = location.search
+    ? location.search.split("=")[1]
+    : "/dashboard";
 
   const [formData, setFormData] = useState(initialState);
 
