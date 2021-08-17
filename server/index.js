@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 
 import userRoutes from "./routes/users.js";
+import contactRoutes from "./routes/contact.js";
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/user", userRoutes);
+app.use("/contact", contactRoutes);
 app.get("/", (req, res) => {
   res.send("App is running");
 });

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 
 import { signIn } from "../../actions/auth";
 
@@ -13,11 +14,13 @@ const LoginScreen = () => {
   };
 
   const userData = useSelector((state) => state.auth);
-
-  const { isLoggedIn } = userData;
-
+  const { authData } = userData;
+  const { addToast } = useToasts();
+  const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const redirect = location.search ? location.search.split("=")[1] : "/";
 
   const [formData, setFormData] = useState(initialState);
 
@@ -27,9 +30,15 @@ const LoginScreen = () => {
     dispatch(signIn(formData));
   };
 
-  if (isLoggedIn) {
-    history.push("/");
-  }
+  useEffect(() => {
+    if (authData) {
+      history.push(redirect);
+      addToast("Logged In Successfully", {
+        appearance: "success",
+        autoDismiss: "true",
+      });
+    }
+  }, [userData, history, redirect, authData]);
 
   return (
     <div className="auth">
