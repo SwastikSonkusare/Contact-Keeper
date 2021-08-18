@@ -5,6 +5,17 @@
   grid-gap: 3rem;
   grid-template-columns: 1fr 1fr;
 
+  &__left-section {
+    & h2 span {
+      width: 100%;
+      margin-block-end: 2rem;
+      display: block;
+      font-size: 2.5rem;
+      color: #010038;
+      text-align: center;
+    }
+  }
+
   &__right-section {
     display: flex;
     grid-gap: 2rem;
@@ -16,11 +27,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 2rem;
+  background-color: #faf1e6;
+  border: 2px solid #fdf6f0;
 
   &__left {
     display: flex;
     flex-direction: column;
-    grid-gap: 5px;
+    grid-gap: 1rem;
   }
 
   &__right {
@@ -33,6 +47,10 @@
   }
 
   &__container {
+    display: flex;
+    align-items: center;
+    grid-gap: 1rem;
+
     & small {
       font-size: 1.3rem;
     }
@@ -42,5 +60,22 @@
     font-size: 1.5rem;
     color: #1597bb;
     font-weight: 600;
+  }
+
+  &__btn {
+    padding: 0.8rem 2rem;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.3rem;
+
+    &--1 {
+      background-color: #b980f0;
+    }
+
+    &--2 {
+      background-color: #f0c929;
+    }
   }
 }

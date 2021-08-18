@@ -1,4 +1,4 @@
-import { AUTH, LOGOUT } from "../constants/actionTypes";
+import { AUTH, LOGOUT, USER_REGISTER_FAIL } from "../constants/actionTypes";
 
 const authReducer = (
   state = { authData: null, isLoggedIn: false, isLoggedOut: false },
@@ -12,6 +12,12 @@ const authReducer = (
         authData: action?.data,
         isLoggedIn: true,
         isLoggedOut: false,
+      };
+
+    case USER_REGISTER_FAIL:
+      return {
+        ...state,
+        error: action.payload,
       };
 
     case LOGOUT:

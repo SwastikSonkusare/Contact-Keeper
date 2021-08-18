@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import decode from "jwt-decode";
 
-import { useDispatch } from "react-redux";
+import { useToasts } from "react-toast-notifications";
+
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,8 +16,11 @@ import { LOGOUT } from "../../constants/actionTypes";
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const { addToast } = useToasts();
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
+  const { error } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const token = user?.token;
@@ -28,7 +33,14 @@ const Header = () => {
       }
     }
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [user?.token, location]);
+
+    if (error) {
+      addToast(error, {
+        appearance: "error",
+        autoDismiss: "true",
+      });
+    }
+  }, [user?.token, location, error]);
 
   const logoutHandler = () => {
     dispatch({ type: LOGOUT });

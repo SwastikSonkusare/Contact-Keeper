@@ -2,18 +2,26 @@ import React, { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { getContacts } from "../../actions/contact";
+import {
+  createContact,
+  deleteContact,
+  getContacts,
+  updateContact,
+} from "../../actions/contact";
 
 import "./DashboardScreen.scss";
 
 const DashboardScreen = () => {
   const initialState = {
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     phone: "",
     type: "personal",
   };
+
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  const [currentId, setCurrentId] = useState(null);
 
   const [formData, setFormData] = useState(initialState);
 
@@ -21,46 +29,59 @@ const DashboardScreen = () => {
 
   const contactDetails = useSelector((state) => state.contacts);
 
-  const { contacts, success } = contactDetails;
+  const {
+    contacts,
+    success,
+    isContactCreated,
+    isContactUpdated,
+    isContactDeleted,
+  } = contactDetails;
+
+  const contact = currentId ? contacts.find((c) => c._id === currentId) : null;
+
+  useEffect(() => {
+    if (contact) {
+      setFormData(contact);
+    }
+  }, [contact]);
 
   useEffect(() => {
     dispatch(getContacts());
-  }, [success, dispatch]);
+  }, [success, dispatch, isContactCreated, isContactUpdated, isContactDeleted]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch()
+    if (currentId) {
+      dispatch(
+        updateContact(currentId, { ...formData, user: user?.result?.name })
+      );
+    }
+
+    dispatch(createContact(formData));
+    setFormData(initialState);
   };
 
   return (
     <div className="dashboard">
       <div className="dashboard__left-section">
+        <h2>
+          <span>{currentId ? "Update a contact" : "Add a contact"}</span>
+        </h2>
         <form className="form" onSubmit={handleSubmit}>
           <div className="form__control">
-            <label className="form__label">First Name</label>
+            <label className="form__label"> Name</label>
             <input
-              name="firstName"
+              name="name"
               className="form__input"
               type="text"
-              value={formData.firstName}
+              value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, [e.target.name]: e.target.value })
               }
             ></input>
           </div>
-          <div className="form__control">
-            <label className="form__label">Last Name</label>
-            <input
-              name="lastName"
-              className="form__input"
-              type="text"
-              value={formData.lastName}
-              onChange={(e) =>
-                setFormData({ ...formData, [e.target.name]: e.target.value })
-              }
-            ></input>
-          </div>
+
           <div className="form__control">
             <label className="form__label">Email</label>
             <input
@@ -89,25 +110,34 @@ const DashboardScreen = () => {
             <h4>Contact Type</h4>
             <div className="form__checkbox">
               <input
-                type="checkbox"
-                id="type"
+                type="radio"
                 name="type"
-                value={formData.type}
-              />
-              <label className="form__label">Personal</label>
+                value="personal"
+                checked={formData.type === "personal"}
+                onChange={(e) =>
+                  setFormData({ ...formData, [e.target.name]: e.target.value })
+                }
+              />{" "}
+              Personal{" "}
               <input
-                type="checkbox"
-                id="type"
+                type="radio"
                 name="type"
-                value={formData.type}
-              />
-              <label className="form__label">Professional</label>
+                value="professional"
+                checked={formData.type === "professional"}
+                onChange={(e) =>
+                  setFormData({ ...formData, [e.target.name]: e.target.value })
+                }
+              />{" "}
+              Professional
             </div>
           </div>
+          <button type="submit" className="form__button form__button--1">
+            {currentId ? "Update a contact" : "Add a contact"}
+          </button>
         </form>
       </div>
       <div className="dashboard__right-section">
-        {contacts.length &&
+        {contacts.length ? (
           contacts.map((c) => (
             <>
               <div className="contact">
@@ -121,11 +151,33 @@ const DashboardScreen = () => {
                   <div className="contact__container">
                     <small>{c.phone}</small>
                   </div>
+
+                  <div className="contact__container">
+                    <button
+                      className="contact__btn contact__btn--1"
+                      onClick={() => setCurrentId(c._id)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="contact__btn contact__btn--2"
+                      onClick={() => dispatch(deleteContact(c._id))}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
                 <div className="contact__right">{c.type}</div>
               </div>
             </>
-          ))}
+          ))
+        ) : (
+          <div className="dashboard__left-section">
+            <h2>
+              <span>No Contacts yet</span>
+            </h2>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -50,5 +50,11 @@
     border: none;
     background-color: #6e85b2;
     letter-spacing: 2px;
+    cursor: pointer;
+
+    &--1 {
+      background-color: #010038;
+      border-radius: 10px;
+    }
   }
 }

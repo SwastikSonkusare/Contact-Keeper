@@ -12,10 +12,10 @@ const LoginScreen = () => {
     email: "",
     password: "",
   };
+  const { addToast } = useToasts();
 
   const userData = useSelector((state) => state.auth);
   const { authData } = userData;
-  const { addToast } = useToasts();
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();

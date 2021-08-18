@@ -14,4 +14,9 @@ API.interceptors.request.use((req) => {
 
 export const signIn = (formData) => API.post("/user/signin", formData);
 export const signUp = (formData) => API.post("/user/signUp", formData);
+
 export const getContacts = () => API.get("/contact");
+export const createContact = (formData) => API.post("/contact", formData);
+export const updateContact = (id, formData) =>
+  API.patch(`/contact/${id}`, formData);
+export const deleteContact = (id) => API.delete(`/contact/${id}`);

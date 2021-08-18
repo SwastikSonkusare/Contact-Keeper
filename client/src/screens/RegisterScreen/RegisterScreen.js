@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 
 import { signUp } from "../../actions/auth";
 
@@ -12,10 +13,11 @@ const RegisterScreen = () => {
     password: "",
     confirmPassword: "",
   };
+  const { addToast } = useToasts();
 
-  const userData = useSelector((state) => state.auth);
+  const { isLoggedIn, error } = useSelector((state) => state.auth);
 
-  const { isLoggedIn } = userData;
+  console.log(error);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -25,7 +27,25 @@ const RegisterScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(signUp(formData));
+    if (!validateEmail(formData.email)) {
+      addToast("You have entered an invalid email address!", {
+        appearance: "error",
+        autoDismiss: "true",
+      });
+    } else if (error) {
+      addToast(error, {
+        appearance: "error",
+        autoDismiss: "true",
+      });
+    } else {
+      dispatch(signUp(formData));
+    }
+  };
+
+  const validateEmail = (email) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   };
 
   if (isLoggedIn) {

@@ -1,6 +1,6 @@
 import * as api from "../api";
 
-import { AUTH } from "../constants/actionTypes";
+import { AUTH, USER_REGISTER_FAIL } from "../constants/actionTypes";
 
 export const signIn = (formData) => async (dispatch) => {
   try {
@@ -17,6 +17,12 @@ export const signUp = (formData) => async (dispatch) => {
 
     dispatch({ type: AUTH, data });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: USER_REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
   }
 };
