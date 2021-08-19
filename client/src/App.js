@@ -28,6 +28,7 @@ const App = () => {
           component={() => (!user ? <RegisterScreen /> : <Redirect to="/" />)}
         />
         <Route path="/dashboard" exact component={DashboardScreen} />
+        <Route path="/dashboard/search" exact component={DashboardScreen} />
       </main>
     </Router>
   );

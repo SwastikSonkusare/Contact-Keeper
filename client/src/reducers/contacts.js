@@ -2,6 +2,7 @@ import {
   CREATE_CONTACT,
   DELETE_CONTACT,
   GET_CONTACTS,
+  GET_CONTACTS_BY_SEARCH,
   UPDATE_CONTACT,
 } from "../constants/actionTypes";
 
@@ -17,6 +18,15 @@ const contactReducer = (
 ) => {
   switch (action.type) {
     case GET_CONTACTS:
+      return {
+        ...state,
+        contacts: action.payload,
+        success: true,
+        isContactCreated: false,
+        isContactUpdated: false,
+        isContactDeleted: false,
+      };
+    case GET_CONTACTS_BY_SEARCH:
       return {
         ...state,
         contacts: action.payload,

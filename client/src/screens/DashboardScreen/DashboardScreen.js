@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import {
   createContact,
   deleteContact,
   getContacts,
+  getContactsBySearch,
   updateContact,
 } from "../../actions/contact";
 
@@ -18,6 +20,9 @@ const DashboardScreen = () => {
     phone: "",
     type: "personal",
   };
+
+  const [search, setSearch] = useState("");
+  const history = useHistory();
 
   const user = JSON.parse(localStorage.getItem("profile"));
 
@@ -60,6 +65,20 @@ const DashboardScreen = () => {
 
     dispatch(createContact(formData));
     setFormData(initialState);
+  };
+
+  const searchContacts = () => {
+    if (search) {
+      console.log(search);
+      dispatch(getContactsBySearch(search));
+      history.push(`/dashboard/search?searchQuery=${search || "none"}`);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.which === 13) {
+      searchContacts();
+    }
   };
 
   return (
@@ -137,6 +156,16 @@ const DashboardScreen = () => {
         </form>
       </div>
       <div className="dashboard__right-section">
+        <div className="dashboard__filter">
+          <input
+            type="text"
+            placeholder="Search for your contacts..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyPress={handleKeyPress}
+          ></input>
+        </div>
+
         {contacts.length ? (
           contacts.map((c) => (
             <>

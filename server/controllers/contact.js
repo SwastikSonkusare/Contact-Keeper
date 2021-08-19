@@ -63,3 +63,20 @@ export const deleteContact = async (req, res) => {
     throw new Error("Contact not found");
   }
 };
+
+export const getContactsBySearch = async (req, res) => {
+  const { searchQuery } = req.query;
+
+  const keyword = searchQuery
+    ? {
+        name: {
+          $regex: searchQuery,
+          $options: "i",
+        },
+      }
+    : {};
+
+  const contacts = await Contact.find({ ...keyword });
+
+  res.json(contacts);
+};

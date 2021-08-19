@@ -3,6 +3,7 @@ import {
   CREATE_CONTACT,
   DELETE_CONTACT,
   GET_CONTACTS,
+  GET_CONTACTS_BY_SEARCH,
   UPDATE_CONTACT,
 } from "../constants/actionTypes";
 
@@ -11,6 +12,15 @@ export const getContacts = () => async (dispatch) => {
     const { data } = await api.getContacts();
 
     dispatch({ type: GET_CONTACTS, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getContactsBySearch = (search) => async (dispatch) => {
+  try {
+    const { data } = await api.getContactsByQuery(search);
+
+    dispatch({ type: GET_CONTACTS_BY_SEARCH, payload: data });
   } catch (error) {
     console.log(error);
   }

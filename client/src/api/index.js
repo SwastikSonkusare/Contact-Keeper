@@ -16,6 +16,8 @@ export const signIn = (formData) => API.post("/user/signin", formData);
 export const signUp = (formData) => API.post("/user/signUp", formData);
 
 export const getContacts = () => API.get("/contact");
+export const getContactsByQuery = (search) =>
+  API.get(`/contact/search?searchQuery=${search || "none"}`);
 export const createContact = (formData) => API.post("/contact", formData);
 export const updateContact = (id, formData) =>
   API.patch(`/contact/${id}`, formData);
