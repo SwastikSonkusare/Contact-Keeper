@@ -26,6 +26,7 @@ const LoginScreen = () => {
     ? location.search.split("=")[1]
     : "/dashboard";
 
+
   const [formData, setFormData] = useState(initialState);
 
   const handleSubmit = (e) => {

@@ -13,8 +13,6 @@ const App = () => {
 
   return (
     <Router>
-
-      
       <Header />
 
       <main>
