@@ -4,6 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 
 import { signIn } from "../../actions/auth";
+import { validateEmail } from "../../utils/validate";
 
 import "./LoginScreen.scss";
 
@@ -13,6 +14,7 @@ const LoginScreen = () => {
     password: "",
   };
   const { addToast } = useToasts();
+  const { error } = useSelector((state) => state.auth);
 
   const userData = useSelector((state) => state.auth);
   const { authData } = userData;
@@ -29,7 +31,19 @@ const LoginScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(signIn(formData));
+    if (!validateEmail(formData.email)) {
+      addToast("You have entered an invalid email address!", {
+        appearance: "error",
+        autoDismiss: "true",
+      });
+    } else if (error) {
+      addToast(error, {
+        appearance: "error",
+        autoDismiss: "true",
+      });
+    } else {
+      dispatch(signIn(formData));
+    }
   };
 
   useEffect(() => {
@@ -73,6 +87,10 @@ const LoginScreen = () => {
 
         <button className="form__button" type="submit">
           Login
+        </button>
+
+        <button className="form__account">
+          <a href="/signup">Don't have an account? Click here!</a>
         </button>
       </form>
     </div>

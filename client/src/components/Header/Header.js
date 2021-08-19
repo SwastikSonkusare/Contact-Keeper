@@ -51,21 +51,23 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__container">
-        <FontAwesomeIcon
-          icon={faAddressBook}
-          size="2x"
-          className="header__logo"
-        />
-        <h2>
-          <span>Contact Keeper</span>
-        </h2>
+        <a href="/">
+          <FontAwesomeIcon
+            icon={faAddressBook}
+            size="2x"
+            className="header__logo"
+          />
+          <h2>
+            <span>Contact Keeper</span>
+          </h2>
+        </a>
       </div>
 
       <ul className="header__items">
         {user?.result ? (
           <>
             <li className="header__item">
-              <a href="!#" className="header__links">
+              <a href="/dashboard" className="header__links">
                 hello, {user?.result?.name}
               </a>
             </li>

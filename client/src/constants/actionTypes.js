@@ -1,6 +1,7 @@
 export const AUTH = "AUTH";
 export const LOGOUT = "LOGOUT";
 export const USER_REGISTER_FAIL = "USER_REGISTER_FAIL";
+export const USER_LOGIN_FAIL = "USER_LOGIN_FAIL";
 
 export const GET_CONTACTS = "GET_CONTACTS";
 export const GET_CONTACTS_BY_SEARCH = "GET_CONTACTS_BY_SEARCH";

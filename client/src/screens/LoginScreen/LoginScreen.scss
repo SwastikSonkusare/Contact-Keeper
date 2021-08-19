@@ -18,12 +18,17 @@
     grid-gap: 1rem;
     flex-direction: column;
     margin-block-end: 3rem;
+
+    & h4 {
+      font-size: 1.5rem;
+    }
   }
 
   &__checkbox {
     display: flex;
     align-items: center;
     grid-gap: 1rem;
+    font-size: 1.5rem;
   }
 
   &__label {
@@ -55,6 +60,22 @@
     &--1 {
       background-color: #010038;
       border-radius: 10px;
+    }
+  }
+
+  &__account {
+    width: 100%;
+    border: none;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    background-color: #171010;
+    cursor: pointer;
+
+    & a {
+      color: #fff5eb;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      text-decoration: none;
     }
   }
 }

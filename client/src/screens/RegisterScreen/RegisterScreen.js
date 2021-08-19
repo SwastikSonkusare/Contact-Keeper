@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 
 import { signUp } from "../../actions/auth";
+import { validateEmail } from "../../utils/validate";
 
 const RegisterScreen = () => {
   const initialState = {
@@ -16,8 +17,6 @@ const RegisterScreen = () => {
   const { addToast } = useToasts();
 
   const { isLoggedIn, error } = useSelector((state) => state.auth);
-
-  console.log(error);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -40,12 +39,6 @@ const RegisterScreen = () => {
     } else {
       dispatch(signUp(formData));
     }
-  };
-
-  const validateEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
   };
 
   if (isLoggedIn) {
@@ -120,6 +113,10 @@ const RegisterScreen = () => {
 
         <button className="form__button" type="submit">
           Register
+        </button>
+
+        <button className="form__account">
+          <a href="/signin">Already have an account? Click here!</a>
         </button>
       </form>
     </div>

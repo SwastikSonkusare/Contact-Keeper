@@ -5,10 +5,17 @@
   padding: 2rem;
   background-color: #141e61;
 
+  @media only screen and (max-width: 37.5em) {
+    flex-direction: column;
+    grid-gap: 3rem;
+  }
+
   &__container {
-    display: flex;
-    grid-gap: 2rem;
-    align-items: center;
+    & a {
+      display: flex;
+      grid-gap: 2rem;
+      align-items: center;
+    }
 
     & h2 span {
       font-size: 1.5rem;
@@ -40,5 +47,6 @@
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 2px;
+    line-height: 2rem;
   }
 }

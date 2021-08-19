@@ -1,0 +1,20 @@
+.home {
+  max-width: 50rem;
+  margin: 10rem auto;
+  width: 100%;
+  text-align: center;
+  letter-spacing: 3px;
+
+  &__heading {
+    margin-bottom: 2rem;
+    & span {
+      font-size: 4rem;
+      color: #b980f0;
+    }
+  }
+
+  &__paragraph {
+    font-size: 3rem;
+    color: #eba83a;
+  }
+}

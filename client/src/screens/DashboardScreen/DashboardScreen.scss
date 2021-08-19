@@ -5,6 +5,13 @@
   grid-gap: 3rem;
   grid-template-columns: 1fr 1fr;
 
+  @media only screen and (max-width: 50em) {
+    margin-inline: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   &__left-section {
     & h2 span {
       width: 100%;
@@ -21,6 +28,23 @@
     grid-gap: 2rem;
     flex-direction: column;
   }
+
+  &__filter {
+    & input {
+      padding: 1rem;
+      width: 100%;
+      border-radius: 10px;
+
+      &::placeholder {
+        font-size: 1.5rem;
+        color: grey;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 }
 
 .contact {
@@ -30,6 +54,11 @@
   padding: 2rem;
   background-color: #faf1e6;
   border: 2px solid #fdf6f0;
+
+  @media only screen and (max-width: 31.25em) {
+    grid-gap: 2rem;
+    flex-direction: column;
+  }
 
   &__left {
     display: flex;
@@ -44,6 +73,11 @@
     color: #fff;
     font-weight: 700;
     letter-spacing: 2px;
+
+    @media only screen and (max-width: 31.25em) {
+      width: 100%;
+      text-align: center;
+    }
   }
 
   &__container {
@@ -69,6 +103,7 @@
     border-radius: 10px;
     font-weight: 600;
     font-size: 1.3rem;
+    cursor: pointer;
 
     &--1 {
       background-color: #b980f0;

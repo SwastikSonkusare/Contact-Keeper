@@ -2,7 +2,7 @@ import React from "react";
 
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
-import HomeScreen from "./screens/HomeScreen";
+import HomeScreen from "./screens/HomeScreen/HomeScreen";
 import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 import DashboardScreen from "./screens/DashboardScreen/DashboardScreen";
@@ -13,10 +13,12 @@ const App = () => {
 
   return (
     <Router>
+
+      
       <Header />
 
       <main>
-        <Route path="/" exact component={HomeScreen} />
+        <Route exact path="/" component={HomeScreen}></Route>
         <Route
           path="/signin"
           exact
@@ -27,7 +29,11 @@ const App = () => {
           exact
           component={() => (!user ? <RegisterScreen /> : <Redirect to="/" />)}
         />
-        <Route path="/dashboard" exact component={DashboardScreen} />
+        <Route
+          path="/dashboard"
+          exact
+          component={() => (user ? <DashboardScreen /> : <Redirect to="/" />)}
+        />
         <Route path="/dashboard/search" exact component={DashboardScreen} />
       </main>
     </Router>
