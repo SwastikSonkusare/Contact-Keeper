@@ -13,6 +13,13 @@
 }
 
 .form {
+  border: 2px solid #fdf6f0;
+
+  border-radius: 10px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  padding: 3rem;
+
   &__control {
     display: flex;
     grid-gap: 1rem;

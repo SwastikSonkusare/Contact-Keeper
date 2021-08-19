@@ -13,6 +13,13 @@
   }
 
   &__left-section {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+      0 0 0 1px rgba(10, 10, 10, 0.02);
+
+    padding: 2rem;
+
     & h2 span {
       width: 100%;
       margin-block-end: 2rem;
@@ -30,8 +37,14 @@
   }
 
   &__filter {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+      0 0 0 1px rgba(10, 10, 10, 0.02);
+
     & input {
-      padding: 1rem;
+      border: none;
+      padding: 1.3rem;
       width: 100%;
       border-radius: 10px;
 
@@ -54,6 +67,10 @@
   padding: 2rem;
   background-color: #faf1e6;
   border: 2px solid #fdf6f0;
+
+  border-radius: 6px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
 
   @media only screen and (max-width: 31.25em) {
     grid-gap: 2rem;
