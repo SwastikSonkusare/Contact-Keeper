@@ -1,6 +1,6 @@
 .dashboard {
   margin: 4rem auto;
-  max-width: 70rem;
+  max-width: 90rem;
   display: grid;
   grid-gap: 3rem;
   grid-template-columns: 1fr 1fr;
@@ -13,7 +13,6 @@
   }
 
   &__left-section {
- 
     & h2 span {
       width: 100%;
       margin-block-end: 2rem;

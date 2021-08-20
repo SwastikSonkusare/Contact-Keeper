@@ -26,6 +26,7 @@ export const getContacts = async (req, res) => {
     const contacts = await Contact.find({ user: req.userId }).sort({
       date: -1,
     });
+
     res.json(contacts);
   } catch (err) {
     console.error(err.message);
@@ -44,8 +45,8 @@ export const updateContact = async (req, res) => {
     const updatedContact = await Contact.findByIdAndUpdate(_id, contact, {
       new: true,
     });
-    res.json(updatedContact);
     await updatedContact.save();
+    res.json(updatedContact);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

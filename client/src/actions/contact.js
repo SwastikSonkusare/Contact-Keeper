@@ -9,7 +9,7 @@ import {
 
 export const getContacts = () => async (dispatch) => {
   try {
-    const { data } = await api.getContacts();
+    const { data } = await api.getAllContacts();
 
     dispatch({ type: GET_CONTACTS, payload: data });
   } catch (error) {

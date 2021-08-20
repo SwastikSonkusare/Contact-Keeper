@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://contact-keeper-js.herokuapp.com/",
+  baseURL: "http://localhost:5000",
 });
 
 API.interceptors.request.use((req) => {
@@ -17,7 +17,7 @@ API.interceptors.request.use((req) => {
 export const signIn = (formData) => API.post("/user/signin", formData);
 export const signUp = (formData) => API.post("/user/signUp", formData);
 
-export const getContacts = () => API.get("/contact");
+export const getAllContacts = () => API.get("/contact");
 export const getContactsByQuery = (search) =>
   API.get(`/contact/search?searchQuery=${search || "none"}`);
 export const createContact = (formData) => API.post("/contact", formData);

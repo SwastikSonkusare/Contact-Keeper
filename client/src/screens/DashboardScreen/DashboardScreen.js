@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
+import NumberFormat from "react-number-format";
 
 import {
   createContact,
@@ -10,37 +12,35 @@ import {
   getContactsBySearch,
   updateContact,
 } from "../../actions/contact";
+import { validateEmail } from "../../utils/validate";
 
 import "./DashboardScreen.scss";
 
 const DashboardScreen = () => {
-  const initialState = {
-    name: "",
-    email: "",
-    phone: "",
-    type: "personal",
-  };
-
   const [search, setSearch] = useState("");
   const history = useHistory();
+  const { addToast } = useToasts();
 
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const [currentId, setCurrentId] = useState(null);
 
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    type: "personal",
+  });
 
   const dispatch = useDispatch();
-
-  const contactDetails = useSelector((state) => state.contacts);
 
   const {
     contacts,
     success,
     isContactCreated,
-    isContactUpdated,
     isContactDeleted,
-  } = contactDetails;
+    isContactUpdated,
+  } = useSelector((state) => state.contacts);
 
   const contact = currentId ? contacts.find((c) => c._id === currentId) : null;
 
@@ -52,24 +52,28 @@ const DashboardScreen = () => {
 
   useEffect(() => {
     dispatch(getContacts());
-  }, [success, dispatch, isContactCreated, isContactUpdated, isContactDeleted]);
+  }, [success, isContactUpdated, isContactDeleted, isContactCreated, dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (currentId) {
+    if (!validateEmail(formData.email)) {
+      addToast("You have entered an invalid email address!", {
+        appearance: "error",
+        autoDismiss: "true",
+      });
+    } else if (currentId) {
       dispatch(
-        updateContact(currentId, { ...formData, user: user?.result?.name })
+        updateContact(currentId, { ...formData, user: user?.result?._id })
       );
+    } else {
+      dispatch(createContact(formData));
     }
-
-    dispatch(createContact(formData));
-    setFormData(initialState);
+    clear();
   };
 
   const searchContacts = () => {
     if (search) {
-      console.log(search);
       dispatch(getContactsBySearch(search));
       history.push(`/dashboard/search?searchQuery=${search || "none"}`);
     }
@@ -79,6 +83,22 @@ const DashboardScreen = () => {
     if (e.which === 13) {
       searchContacts();
     }
+  };
+
+  const handleDeleteContact = (id) => {
+    console.log(id);
+    dispatch(deleteContact(id));
+    clear();
+  };
+
+  const clear = () => {
+    setCurrentId(null);
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      type: "personal",
+    });
   };
 
   return (
@@ -115,15 +135,17 @@ const DashboardScreen = () => {
           </div>
           <div className="form__control">
             <label className="form__label">Phone</label>
-            <input
+
+            <NumberFormat
               name="phone"
               className="form__input"
-              type="number"
               value={formData.phone}
+              displayType={"input"}
+              format="### ### ####"
               onChange={(e) =>
                 setFormData({ ...formData, [e.target.name]: e.target.value })
               }
-            ></input>
+            />
           </div>
           <div className="form__control">
             <h4>Contact Type</h4>
@@ -190,7 +212,7 @@ const DashboardScreen = () => {
                     </button>
                     <button
                       className="contact__btn contact__btn--2"
-                      onClick={() => dispatch(deleteContact(c._id))}
+                      onClick={() => handleDeleteContact(c._id)}
                     >
                       Delete
                     </button>

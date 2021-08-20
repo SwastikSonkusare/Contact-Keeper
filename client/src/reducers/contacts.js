@@ -43,6 +43,7 @@ const contactReducer = (
         isContactCreated: true,
         isContactUpdated: false,
         isContactDeleted: false,
+        success: true,
       };
 
     case UPDATE_CONTACT:
@@ -54,6 +55,7 @@ const contactReducer = (
         isContactCreated: false,
         isContactUpdated: true,
         isContactDeleted: false,
+        success: true,
       };
 
     case DELETE_CONTACT:
@@ -63,6 +65,7 @@ const contactReducer = (
         isContactCreated: false,
         isContactUpdated: false,
         isContactDeleted: true,
+        success: true,
       };
 
     default:
