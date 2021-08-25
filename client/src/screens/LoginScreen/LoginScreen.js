@@ -4,6 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 
 import { signIn } from "../../actions/auth";
+import Spinner from "../../components/Spinner/Spinner";
 import { validateEmail } from "../../utils/validate";
 
 import "./LoginScreen.scss";
@@ -45,8 +46,6 @@ const LoginScreen = () => {
     }
   };
 
-  console.log(loading);
-
   useEffect(() => {
     if (authData) {
       history.push(redirect);
@@ -87,7 +86,7 @@ const LoginScreen = () => {
         </div>
 
         <button className="form__button" type="submit">
-          {loading ? "Loading" : "Login"}
+          {loading ? <Spinner /> : "Login"}
         </button>
 
         <button className="form__account">

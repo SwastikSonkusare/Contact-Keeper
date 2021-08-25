@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 
 import { signUp } from "../../actions/auth";
+import Spinner from "../../components/Spinner/Spinner";
 import { validateEmail } from "../../utils/validate";
 
 const RegisterScreen = () => {
@@ -16,7 +17,7 @@ const RegisterScreen = () => {
   };
   const { addToast } = useToasts();
 
-  const { isLoggedIn, error } = useSelector((state) => state.auth);
+  const { isLoggedIn, error, loading } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -112,7 +113,7 @@ const RegisterScreen = () => {
         </div>
 
         <button className="form__button" type="submit">
-          Register
+          {loading ? <Spinner /> : "Register"}
         </button>
 
         <button className="form__account">
