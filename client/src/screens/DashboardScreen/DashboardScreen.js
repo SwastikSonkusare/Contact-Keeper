@@ -34,13 +34,8 @@ const DashboardScreen = () => {
 
   const dispatch = useDispatch();
 
-  const {
-    contacts,
-    success,
-    isContactCreated,
-    isContactDeleted,
-    isContactUpdated,
-  } = useSelector((state) => state.contacts);
+  const { contacts, isContactCreated, isContactDeleted, isContactUpdated } =
+    useSelector((state) => state.contacts);
 
   const contact = currentId ? contacts.find((c) => c._id === currentId) : null;
 
@@ -52,7 +47,28 @@ const DashboardScreen = () => {
 
   useEffect(() => {
     dispatch(getContacts());
-  }, [success, isContactUpdated, isContactDeleted, isContactCreated, dispatch]);
+  }, [isContactUpdated, isContactDeleted, isContactCreated, dispatch]);
+
+  useEffect(() => {
+    if (isContactCreated) {
+      addToast("Contact Created!", {
+        appearance: "success",
+        autoDismiss: "true",
+      });
+    }
+    if (isContactUpdated) {
+      addToast("Contact Updated!", {
+        appearance: "success",
+        autoDismiss: "true",
+      });
+    }
+    if (isContactDeleted) {
+      addToast("Contact Deleted!", {
+        appearance: "success",
+        autoDismiss: "true",
+      });
+    }
+  }, [isContactUpdated, isContactDeleted, isContactCreated]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -9,7 +9,6 @@ import {
 const contactReducer = (
   state = {
     contacts: [],
-    success: false,
     isContactCreated: false,
     isContactUpdated: false,
     isContactDeleted: false,
@@ -21,7 +20,6 @@ const contactReducer = (
       return {
         ...state,
         contacts: action.payload,
-        success: true,
         isContactCreated: false,
         isContactUpdated: false,
         isContactDeleted: false,
@@ -30,7 +28,6 @@ const contactReducer = (
       return {
         ...state,
         contacts: action.payload,
-        success: true,
         isContactCreated: false,
         isContactUpdated: false,
         isContactDeleted: false,
@@ -43,7 +40,6 @@ const contactReducer = (
         isContactCreated: true,
         isContactUpdated: false,
         isContactDeleted: false,
-        success: true,
       };
 
     case UPDATE_CONTACT:
@@ -55,7 +51,6 @@ const contactReducer = (
         isContactCreated: false,
         isContactUpdated: true,
         isContactDeleted: false,
-        success: true,
       };
 
     case DELETE_CONTACT:
@@ -65,7 +60,6 @@ const contactReducer = (
         isContactCreated: false,
         isContactUpdated: false,
         isContactDeleted: true,
-        success: true,
       };
 
     default:
