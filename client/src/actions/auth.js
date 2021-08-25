@@ -2,12 +2,17 @@ import * as api from "../api";
 
 import {
   AUTH,
+  AUTH_REQUEST,
   USER_LOGIN_FAIL,
   USER_REGISTER_FAIL,
 } from "../constants/actionTypes";
 
 export const signIn = (formData) => async (dispatch) => {
   try {
+    dispatch({
+      type: AUTH_REQUEST,
+    });
+
     const { data } = await api.signIn(formData);
 
     dispatch({ type: AUTH, data });
@@ -23,6 +28,9 @@ export const signIn = (formData) => async (dispatch) => {
 };
 export const signUp = (formData) => async (dispatch) => {
   try {
+    dispatch({
+      type: AUTH_REQUEST,
+    });
     const { data } = await api.signUp(formData);
 
     dispatch({ type: AUTH, data });

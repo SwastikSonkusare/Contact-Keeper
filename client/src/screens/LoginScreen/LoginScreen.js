@@ -16,8 +16,7 @@ const LoginScreen = () => {
   const { addToast } = useToasts();
   const { error } = useSelector((state) => state.auth);
 
-  const userData = useSelector((state) => state.auth);
-  const { authData } = userData;
+  const { authData, loading } = useSelector((state) => state.auth);
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -25,7 +24,6 @@ const LoginScreen = () => {
   const redirect = location.search
     ? location.search.split("=")[1]
     : "/dashboard";
-
 
   const [formData, setFormData] = useState(initialState);
 
@@ -47,6 +45,8 @@ const LoginScreen = () => {
     }
   };
 
+  console.log(loading);
+
   useEffect(() => {
     if (authData) {
       history.push(redirect);
@@ -55,7 +55,7 @@ const LoginScreen = () => {
         autoDismiss: "true",
       });
     }
-  }, [userData, history, redirect, authData]);
+  }, [authData, history, redirect]);
 
   return (
     <div className="auth">
@@ -87,7 +87,7 @@ const LoginScreen = () => {
         </div>
 
         <button className="form__button" type="submit">
-          Login
+          {loading ? "Loading" : "Login"}
         </button>
 
         <button className="form__account">

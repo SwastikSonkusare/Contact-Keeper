@@ -1,4 +1,5 @@
 export const AUTH = "AUTH";
+export const AUTH_REQUEST = "AUTH_REQUEST";
 export const LOGOUT = "LOGOUT";
 export const USER_REGISTER_FAIL = "USER_REGISTER_FAIL";
 export const USER_LOGIN_FAIL = "USER_LOGIN_FAIL";
